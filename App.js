@@ -6,109 +6,72 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
+  ScrollView,Text,View,SafeAreaView,StyleSheet, TextInput
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const currencyPerRupee={
+  DOLLAR:0.014,
+  EURO:0.012,
+  POUND:0.011,
+  RUBEL:0.93,
+  AUSDOLLAR:0.2,
+  CANDOLLAR:0.019,
+  YEN:1.54,
+  DINAR:0.0043,
+  BITCOIN:0.000004
+}
 
-const App: () => React$Node = () => {
+const App = () => {
+  const [inputValue,setInputValue]=useState(0)
+  const [resultValue,setResultValue]=useState(0)
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
+    <ScrollView backgroundColor="#1b262c">
+      <SafeAreaView style={styles.container}>
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultValue}>12.2</Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputText} placeholder="Enter Value" keyboardType="numeric" placeholderTextColor="#c1c1c1"></TextInput>
+        </View>
       </SafeAreaView>
-    </>
-  );
-};
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
+    </ScrollView>
+     </>
+  )}
 
 export default App;
+
+const styles=StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:"#1b262c"
+  },
+  resultContainer:{
+    height:70,
+    marginTop:80,
+    justifyContent:"center",
+    borderColor:"#bbe1fa",
+    borderWidth:2,
+    alignItems:"center"
+  },resultValue:{
+    fontSize:30,
+    color:"#FFF",
+    fontWeight:"bold"
+  },
+  inputContainer:{
+    height:70,
+    marginTop:10,
+    justifyContent:"center",
+    alignItems:"center",
+    borderColor:"#bbe1fa",
+    borderWidth:2,
+  },
+  inputText:{
+    fontSize:30,
+    color:"#FFF",
+    fontWeight:"bold"
+  }
+})
