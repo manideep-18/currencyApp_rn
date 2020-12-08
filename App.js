@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import {
-  ScrollView,Text,View,SafeAreaView,StyleSheet, TextInput,TouchableOpacity
+  ScrollView,Text,View,SafeAreaView,StyleSheet, TextInput,TouchableOpacity, Alert
 } from 'react-native';
 
 const currencyPerRupee={
@@ -27,19 +27,28 @@ const App = () => {
   const [inputValue,setInputValue]=useState(0)
   const [resultValue,setResultValue]=useState(0)
 
+  const buttonPressed=(currencyKey)=>{
+    if(!inputValue){
+      Alert('Please enter a value')
+    }
+
+    const result=parseFloat(inputValue)*currencyPerRupee[currencyKey]
+    setResultValue(result.toFixed(2))
+  }
+
   return (
     <>
     <ScrollView backgroundColor="#1b262c" keyboardShouldPersistTaps="handled" contentInsetAdjustmentBehavior="automatic">
       <SafeAreaView style={styles.container}>
         <View style={styles.resultContainer}>
-          <Text style={styles.resultValue}>12.2</Text>
+          <Text style={styles.resultValue}>{resultValue}</Text>
         </View>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.inputText} placeholder="Enter Value" keyboardType="numeric" placeholderTextColor="#c1c1c1"></TextInput>
+          <TextInput style={styles.inputText} placeholder="Enter Value" keyboardType="numeric" placeholderTextColor="#c1c1c1" value={inputValue} onChangeText={(inputValue)=>{setInputValue(inputValue)}}></TextInput>
         </View>
         <View style={styles.convertButtonContainer}>
           {Object.keys(currencyPerRupee).map((eachKey)=>(
-            <TouchableOpacity key={eachKey} style={styles.convertButton}>
+            <TouchableOpacity key={eachKey} style={styles.convertButton} onPress={()=>{buttonPressed(eachKey)}}>
               <Text style={styles.convertButtonText}>
                 {eachKey}
               </Text>
