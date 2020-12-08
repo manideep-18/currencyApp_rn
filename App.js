@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import {
-  ScrollView,Text,View,SafeAreaView,StyleSheet, TextInput
+  ScrollView,Text,View,SafeAreaView,StyleSheet, TextInput,TouchableOpacity
 } from 'react-native';
 
 const currencyPerRupee={
@@ -29,13 +29,22 @@ const App = () => {
 
   return (
     <>
-    <ScrollView backgroundColor="#1b262c">
+    <ScrollView backgroundColor="#1b262c" keyboardShouldPersistTaps="handled" contentInsetAdjustmentBehavior="automatic">
       <SafeAreaView style={styles.container}>
         <View style={styles.resultContainer}>
           <Text style={styles.resultValue}>12.2</Text>
         </View>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputText} placeholder="Enter Value" keyboardType="numeric" placeholderTextColor="#c1c1c1"></TextInput>
+        </View>
+        <View style={styles.convertButtonContainer}>
+          {Object.keys(currencyPerRupee).map((eachKey)=>(
+            <TouchableOpacity key={eachKey} style={styles.convertButton}>
+              <Text style={styles.convertButtonText}>
+                {eachKey}
+              </Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -73,5 +82,24 @@ const styles=StyleSheet.create({
     fontSize:30,
     color:"#FFF",
     fontWeight:"bold"
+  },
+  convertButtonContainer:{
+    flexDirection:"row",
+    flexWrap:"wrap",
+    marginTop:10
+  },
+  convertButton:{
+    height:100,
+    width:"33.3%",
+    alignItems:"center",
+    justifyContent:"center",
+    borderWidth:2,
+    borderColor:"#bbe1fa",
+    marginTop:10,
+    backgroundColor:"#0f4c75"
+  },
+  convertButtonText:{
+    color:"#FFF",
+    fontSize:15
   }
 })
